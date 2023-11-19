@@ -1,0 +1,23 @@
+@import '/src/style/clock.css';
+
+:root {
+    /* variaveis */
+    --bg-color: #f2f2f2;
+
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: lighter;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+}
