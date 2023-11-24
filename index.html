@@ -6,83 +6,46 @@
     <title>Relógio - Pomodoro</title>
 
     <script src="/src/js/Main.js" defer></script>
-    <link rel="stylesheet" href="/src/style/Main.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/src/style/style.css">
 
 </head>
 <body>
+  
+    <main>
 
-    <!-- icons:
-        add
-        remove
-        replay
-
-        play_arrow
-        pause || stop
-        play_pause
-
-        <span class="material-symbols-outlined">add</span>
-    -->
-
-     <div class="timer__pomodor">
-
-         
-         <div class="timer">
-            <h1>Ready?</h1>
-            <div>
-                <span id="minutes" class="time">00</span>
+        <section class="timer">
+            <h1>Are you ready?</h1>
+            <div class="time-display">
+                <span id="minutes">25</span>
                 <span>:</span>
-                <span id="seconds" class="time">00</span>
+                <span id="seconds">00</span>
             </div>
-        </div>
+        </section>
 
-        <div class="btns__timer__control">
+        <section class="controls">
+            <section class="play">
+                <button>Play</button>
+                <button>Pause</button>
+                <button>Stop</button>
+                <button>Replay</button>
+            </section>
 
-            <button class="btn">
-                <span class="material-symbols-outlined">play_arrow</span>
-            </button>
+            <section class="timer-controls">
+                <div class="work-section">
+                    <button class="btn-control" value="addtimework">+</button>
+                    <input type="number" value="25" id="work_section_time">
+                    <button class="btn-control" value="removetimework">-</button>
+                </div>
 
-            <button class="btn">
-                <span class="material-symbols-outlined">pause</span>
-            </button>
+                <div class="break-section">
+                    <button class="btn-control" value="addtimebreak">+</button>
+                    <input type="number" value="5" id="break_section_time">
+                    <button class="btn-control" value="removetimebreak">-</button>
+                </div>
+            </section>
+        </section>
 
-            <button class="btn">
-                <span class="material-symbols-outlined">stop</span>
-            </button>
-
-            <button class="btn">
-                <span class="material-symbols-outlined">replay</span>
-            </button>
-        </div>
-
-        <div class="settings">
-            <div class="set-minutes">
-                <button class="set-btn" id="add__minutes">
-                    <span class="material-symbols-outlined">add</span>
-                </button>
-                <span>00</span>
-                <button class="set-btn" id="remove__minutes">
-                    <span class="material-symbols-outlined">remove</span>
-                </button>
-            </div>
-            <div class="set-seconds">
-                <button class="set-btn" id="add__seconds">
-                    <span class="material-symbols-outlined">add</span>
-                </button>
-                <span>00</span>
-                <button class="set-btn" id="remove__seconds">
-                    <span class="material-symbols-outlined">remove</span>
-                </button>
-            </div>
-        </div>
-     </div>
-
-    
+    </main>
     
 </body>
 </html>

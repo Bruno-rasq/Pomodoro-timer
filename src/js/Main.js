@@ -1,21 +1,27 @@
-const min = document.querySelector('#minutes')
-const sec = document.querySelector('#seconds')
+const minutes = document.querySelector('#minutes')
+const seconds = document.querySelector('#seconds')
 
-const timers__btn = document.querySelectorAll('.btns__timer__control  .btn')
+const work_time = document.querySelector('#work_section_time')
+const break_time = document.querySelector('#break_section_time')
 
-const add__min__btn = document.querySelector('#add__minutes')
-const remove__min__btn = document.querySelector('#remove__minutes')
-const add__sec__btn = document.querySelector('#add__seconds')
-const remove__sec__btn = document.querySelector('#remove__seconds')
-
-const span__min = document.querySelector('.set-minutes > span')
-const span__sec = document.querySelector('.set-seconds > span')
+const btn_time_controls = document.querySelectorAll('.btn-control')
 
 
+const Debug = () => {
+    console.log(work_time.value, break_time.value)
 
-// controle do cronometro
-timers__btn.forEach(key => {
-    key.addEventListener('click', () => {
-        console.log(key)
+}
+
+
+btn_time_controls.forEach((btn) => {
+    btn.addEventListener('click', () => {
+
+        if(btn.value === 'addtimework' && work_time.value < 30) work_time.value++
+        if(btn.value === 'removetimework' && work_time.value > 0) work_time.value--
+        if(btn.value === 'addtimebreak' && break_time.value < 10) break_time.value++
+        if(btn.value === 'removetimebreak' && break_time.value > 0) break_time.value--
+
+        
+        Debug()
     })
 })
