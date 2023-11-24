@@ -1,6 +1,7 @@
 const title = document.querySelector('#title')
 const minutes = document.querySelector('#minutes')
 const seconds = document.querySelector('#seconds')
+const audio = new Audio('/assets/audio.mp3')
 
 const work_time = document.querySelector('#work_section_time')
 const break_time = document.querySelector('#break_section_time')
@@ -8,11 +9,14 @@ const break_time = document.querySelector('#break_section_time')
 const btn_time_controls = document.querySelectorAll('.btn-control')
 const play = document.querySelector('#btn_play')
 const pause = document.querySelector('#btn_pause')
+const stop = document.querySelector('#btn_stop')
+const replay = document.querySelector('#btn_replay')
 
+let loop;
 let aux_minutes;
 let aux_seconds;
 let passingTime = false;
-let loop;
+let workSEssion = false;
 
 
 
@@ -79,6 +83,8 @@ const EndTime = () => {
         passingTime = false
         console.log('acabou o time')
         play.removeAttribute('disabled')
+
+        audio.play()
     } 
 }
 
@@ -103,6 +109,7 @@ play.addEventListener('click', () => {
 
         StartTime(work_time.value, aux_seconds)
         play.setAttribute('disabled', true)
+        play.textContent = 'play'
 
     } else {
         console.log('o tempo já está passando.')
@@ -116,9 +123,18 @@ pause.addEventListener('click', () => {
         title.innerHTML = 'paused'
         clearInterval(loop)
         play.removeAttribute('disabled')
+        play.textContent = 'continue'
         passingTime = false
 
     } else {
         console.log('o tempo já está parado.')
     }
+})
+
+stop.addEventListener('click', () => {
+    console.log('parado')
+})
+
+replay.addEventListener('click', () => {
+    console.log('denovo')
 })
