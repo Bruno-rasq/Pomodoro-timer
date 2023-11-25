@@ -8,13 +8,13 @@ A Técnica Pomodoro é um método de gerenciamento de tempo desenvolvido por Fra
 
 ## Usuário deverá:
 
- - [ ] O usuário deverá ver um timer de 25 minutos - seção de trabalho.
+ - [x] O usuário deverá ver um timer de 25 minutos - seção de trabalho.
  - [ ] Depois que a seção de trabalho terminar, o usuáro  poderá ver um timer de 5 minutos. - seção de descanso.
- - [ ] O usuário poderá iniciar/pausar/parar e reiniciar o timer.
+ - [x] O usuário poderá iniciar/pausar e reiniciar o timer.
 
 ## features Bônus:
 
-- [ ] O usuário deverá ouvir um som tocando assim que cada seção acabar.
+- [x] O usuário deverá ouvir um som tocando assim que cada seção acabar.
 - [ ] O usuário deverá ser capaz de manipular os minutos de cada seção.
 - [ ] O usuário deverá receber um descanso longo de 10 minutos após o termino de 4 seções de descanso. 
 

@@ -9,8 +9,7 @@ const break_time = document.querySelector('#break_section_time')
 const btn_time_controls = document.querySelectorAll('.btn-control')
 const play = document.querySelector('#btn_play')
 const pause = document.querySelector('#btn_pause')
-const stop = document.querySelector('#btn_stop')
-const replay = document.querySelector('#btn_replay')
+const reset = document.querySelector('#btn_reset')
 
 let loop;
 let aux_minutes;
@@ -20,18 +19,7 @@ let workSEssion = false;
 
 
 
-const Debug = () => {
-    console.log(work_time.value, break_time.value)
 
-}
-
-const setMin = () => {
-    if(work_time.value < 10){
-        minutes.innerHTML = `0${work_time.value}`
-    } else {
-        minutes.innerHTML = `${work_time.value}`
-    } 
-}
 
 const setSec = (time) => {
 
@@ -42,7 +30,7 @@ const setSec = (time) => {
     }
 }
 
-const displayMin = (time) => {
+const setMin = (time) => {
 
     if(time < 10){
         minutes.innerHTML = `0${time}`
@@ -53,7 +41,7 @@ const displayMin = (time) => {
 
 const StartTime = ( min = 0, sec = 0) => {
 
-    title.innerHTML = 'Go!'
+    title.innerHTML = 'Go! - work session'
     passingTime = true
     aux_minutes = min
     aux_seconds = sec
@@ -64,7 +52,7 @@ const StartTime = ( min = 0, sec = 0) => {
             aux_seconds = 60
             aux_minutes--
 
-            displayMin(aux_minutes)
+            setMin(aux_minutes)
         }
 
         aux_seconds--
@@ -78,15 +66,63 @@ const StartTime = ( min = 0, sec = 0) => {
 const EndTime = () => {
 
     if(aux_minutes === 0 && aux_seconds === 0){
-        title.innerHTML = 'End Time'
+
         clearInterval(loop)
         passingTime = false
+
+        title.innerHTML = 'End Time - work session'
         console.log('acabou o time')
         play.removeAttribute('disabled')
 
         audio.play()
+        btn_time_controls.forEach((btn) => btn.removeAttribute("disabled"))
     } 
 }
+
+const playTime = () => {
+
+    if(passingTime === false){
+
+        btn_time_controls.forEach((btn) => btn.setAttribute("disabled", true))
+
+        StartTime(work_time.value, aux_seconds)
+        play.setAttribute('disabled', true)
+        play.textContent = 'play'
+
+    }
+}
+
+const pauseTime = () => {
+
+    if(passingTime === true){
+        
+        clearInterval(loop)
+        passingTime = false
+
+        title.innerHTML = 'paused'
+        play.removeAttribute('disabled')
+        play.textContent = 'continue'
+
+    }
+}
+
+const resetTime = () => {
+
+    clearInterval(loop)
+    passingTime = false
+
+    work_time.value = 25
+    aux_seconds = 0
+    
+    setMin(work_time.value)
+    setSec(aux_seconds)
+
+    play.removeAttribute('disabled')
+    play.textContent = 'play'
+
+    btn_time_controls.forEach((btn) => btn.removeAttribute("disabled"))
+}
+
 
 
 
@@ -98,43 +134,12 @@ btn_time_controls.forEach((btn) => {
         if(btn.value === 'addtimebreak' && break_time.value < 10) break_time.value++
         if(btn.value === 'removetimebreak' && break_time.value > 1) break_time.value--
 
-        setMin()
-        // Debug()
+        setMin(work_time.value)
     })
 })
 
-play.addEventListener('click', () => {
+play.addEventListener('click', playTime)
 
-    if(passingTime === false){
+pause.addEventListener('click', pauseTime)
 
-        StartTime(work_time.value, aux_seconds)
-        play.setAttribute('disabled', true)
-        play.textContent = 'play'
-
-    } else {
-        console.log('o tempo já está passando.')
-    }
-})
-
-pause.addEventListener('click', () => {
-
-    if(passingTime === true){
-        
-        title.innerHTML = 'paused'
-        clearInterval(loop)
-        play.removeAttribute('disabled')
-        play.textContent = 'continue'
-        passingTime = false
-
-    } else {
-        console.log('o tempo já está parado.')
-    }
-})
-
-stop.addEventListener('click', () => {
-    console.log('parado')
-})
-
-replay.addEventListener('click', () => {
-    console.log('denovo')
-})
+reset.addEventListener('click', resetTime)
