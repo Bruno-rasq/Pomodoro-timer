@@ -15,9 +15,9 @@ let loop;
 let aux_minutes;
 let aux_seconds;
 let passingTime = false;
-let workSEssion = false;
 
-
+let breaksession = false;
+let countBreaksession = 0;
 
 
 
@@ -39,7 +39,7 @@ const setMin = (time) => {
     }
 }
 
-const StartTime = ( min = 0, sec = 0) => {
+const StartTime = ( min = 25, sec = 0) => {
 
     title.innerHTML = 'Go! - work session'
     passingTime = true
@@ -76,22 +76,49 @@ const EndTime = () => {
 
         audio.play()
         btn_time_controls.forEach((btn) => btn.removeAttribute("disabled"))
-    } 
+
+        setTimeout(()=> {
+
+            breaksessionTime()
+
+        }, 3000)
+    
+    }
+
+}
+
+const breaksessionTime = () => {
+
+    btn_time_controls.forEach((btn) => btn.removeAttribute("disabled"))
+    if(countBreaksession === 4 && breaksession === false){
+
+        StartTime(10)
+        countBreaksession = 0
+
+    } else if(breaksession === false){
+        StartTime(break_time.value)
+        breaksession = true
+        countBreaksession++
+
+    } else {
+        resetTime()
+    }
 }
 
 const playTime = () => {
 
     if(passingTime === false){
 
+        passingTime = true
         btn_time_controls.forEach((btn) => btn.setAttribute("disabled", true))
 
         StartTime(work_time.value, aux_seconds)
         play.setAttribute('disabled', true)
         play.textContent = 'play'
-
     }
 }
 
+// Bug na função pauseTime: timer se comportando estranho somente quandfo o pause é acionado.
 const pauseTime = () => {
 
     if(passingTime === true){
@@ -110,8 +137,10 @@ const resetTime = () => {
 
     clearInterval(loop)
     passingTime = false
+    breaksession = false
 
     work_time.value = 25
+    break_time.value = 5
     aux_seconds = 0
     
     setMin(work_time.value)
@@ -119,10 +148,10 @@ const resetTime = () => {
 
     play.removeAttribute('disabled')
     play.textContent = 'play'
+    title.innerHTML = 'Are you ready?'
 
     btn_time_controls.forEach((btn) => btn.removeAttribute("disabled"))
 }
-
 
 
 
