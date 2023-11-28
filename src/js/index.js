@@ -1,5 +1,8 @@
 'use strict';
 
+const Body = document.querySelector('#body')
+const Main = document.querySelector('#main')
+
 const title = document.querySelector('#title')
 const audio = new Audio('/assets/audio.mp3')
 
@@ -22,12 +25,13 @@ let workMinutes = 25,
     breakMinutes = 5,
     aux_minutes = 0, 
     aux_seconds = 0, 
-    count_break_sessions = 0,
-    Time_passing = false
+    count_break_sessions = 1,
+    Time_passing = false, 
+    workSession = false, 
+    breakSession = false;
 
 let Time_loop; 
 
-let workSession = false, breakSession = false
 
 
 const DeBug = () => {
@@ -45,6 +49,10 @@ const DeBug = () => {
     console.log(debug.join('\n'))
 }
 
+const UpdateTitle = ( text ) => {
+    title.innerHTML = text
+}
+
 const sessionDuration = ( element, value ) => {
     element.innerHTML = `${value} min`
 }
@@ -60,7 +68,14 @@ const displayTimer = ( element, time ) => {
 
 const Reset = () => {
 
-    count_break_sessions = 0
+    UpdateTitle('Are you ready?')
+
+    play.removeAttribute('disabled')
+    pause.removeAttribute('disabled')
+    play.innerHTML = 'Play'
+    play.classList.remove('active')
+    pause.classList.remove('active')
+
     aux_seconds = 0
     aux_minutes = 0
     workMinutes = 25
@@ -75,22 +90,44 @@ const Reset = () => {
     displayTimer(seconds, aux_seconds)
 
     clearInterval(Time_loop)
+    btn_time_controls.forEach((btn) => btn.removeAttribute("disabled"))
 
-    DeBug()
+    // DeBug()
 }
-
 
 const Play = () => {
 
+    play.setAttribute('disabled', true)
+    play.innerHTML = 'Play'
+    play.classList.add('active')
+    pause.classList.remove('active')
+    pause.removeAttribute('disabled')
+
     if(!workSession) {
         
+        UpdateTitle('Work session')
         WorkTimer(workMinutes)
+        btn_time_controls.forEach((btn) => btn.setAttribute("disabled", true))
 
     } else if( workSession && !breakSession){
 
-        BreakTimer(breakMinutes)
-    }
+        UpdateTitle(`Break Session ${count_break_sessions}`)
+        btn_time_controls.forEach((btn) => btn.setAttribute("disabled", true))
 
+        if(count_break_sessions >= 4){
+
+            BreakTimer(10)
+            count_break_sessions = 0
+
+        } else {
+
+            BreakTimer(breakMinutes)
+            count_break_sessions++
+        }
+
+    } else {
+        Reset()
+    }
     // DeBug()
 }
 
@@ -98,7 +135,13 @@ const Pause = () => {
 
     if(Time_passing === true){
 
-        console.log('pausado')
+        play.removeAttribute('disabled')
+        pause.setAttribute('disabled', true)
+        play.innerHTML = 'Continue'
+        pause.classList.add('active')
+        play.classList.remove('active')
+
+        UpdateTitle('paused')
         clearInterval(Time_loop)
         Time_passing = false
     }
@@ -111,7 +154,7 @@ const EndTime = () => {
     if(aux_minutes === 0 && aux_seconds === 0){
 
         audio.play()
-        console.log('acabou o tempo')
+        UpdateTitle('End Session')
 
         clearInterval(Time_loop)
         Time_passing = false
@@ -134,8 +177,6 @@ const EndTime = () => {
 }
 
 const WorkTimer = ( time ) => {
-
-    console.log('iniciando cronometro')
     
     if(Time_passing === false){
 
@@ -164,8 +205,6 @@ const WorkTimer = ( time ) => {
 }
 
 const BreakTimer = ( time ) => {
-
-    console.log('iniciando intervalo')
     
     if(Time_passing === false){
 
@@ -201,9 +240,57 @@ const AutoPlay = () => {
 }
 
 
+
+// iniciando app
+const startApp = () => {
+
+    setTimeout(() => {
+        body.removeChild(loadCard)
+        main.style.display = 'flex'
+        Reset()
+    }, 4000)
+}
+
+// auxiliar na criação de elemento
+const CreateElement = (tag, classe) => {
+    const element = document.createElement(tag)
+    element.className = classe
+    return element
+}
+
+//criando elemento de loading
+const CreateLoading = () => {
+    
+    const load = CreateElement('div', 'load')
+    const title = CreateElement('h1', 'title')
+    const loading = CreateElement('div', 'loading')
+    const span1 = CreateElement('span')
+    const span2 = CreateElement('span')
+    const span3 = CreateElement('span')
+
+    title.innerHTML = 'Pomodoro Timer | App'
+    span1.innerHTML = '.'
+    span2.innerHTML = '.'
+    span3.innerHTML = '.'
+
+    loading.appendChild(span1)
+    loading.appendChild(span2)
+    loading.appendChild(span3)
+    load.appendChild(title)
+    load.appendChild(loading)
+
+    return load
+}
+
+const loadCard = CreateLoading()
+
+
+
+
 window.onload = () => {
 
-    Reset()
+    Body.appendChild(loadCard)
+    startApp()
 }
 
 btn_time_controls.forEach((btn) => {

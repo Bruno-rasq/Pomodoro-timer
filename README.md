@@ -1,4 +1,8 @@
 # Pomodoro-timer
+
+<div align ='center'>
+<img src='/assets/favicon-16x16.png' width='100px' height='100px'>
+</div>
  
 ## License 
 ![License](https://img.shields.io/github/license/Bruno-rasq/Pomodoro-timer.svg)
