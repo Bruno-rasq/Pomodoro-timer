@@ -2,15 +2,26 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+:root{
+
+    --font-size: 16px;
+    --bg-color: #1b1b1b;
+    --text-color: #e6e6e6;
+    --gap-size: 20px;
 }
 
 body{
+
     width: 100vw;
     height: 100dvh;
-
     position: relative;
 
-    background-color: lightgrey;
+    background-color: yellow;
+    color: var(--text-color);
+    letter-spacing: 3px;
 }
 
 main{
@@ -19,8 +30,85 @@ main{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: var(--bg-color);
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
+    padding: 50px;
+}
+
+.timer{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-size);
+}
+
+.time-display{
+
+    font-size: 1.8rem;
+}
+
+.play{
+
+    display: flex;
+    gap: var(--gap-size);
+    justify-content: center;
+    margin-bottom: 45px;
+}
+
+.play > button{
+
+    width: 80px;
+    height: fit-content;
+    padding: 5px;
+    background: none;
+    border: 2px solid var(--text-color);
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.play > button:hover{
+
+    color: var(--bg-color);
+    background-color: var(--text-color);
+}
+
+.play .active{
+
+    color: var(--bg-color);
+    background-color: var(--text-color);
+}
+
+.timer-controls > div{
+
+    width: 100%;
+}
+
+.timer-controls div span{
+
+    width: 50px;
+}
+
+.timer-controls > div{
+
+    display: flex;
+}
+
+.timer-controls .btn-control{
+
+    width: 30px;
+    height: 30px;
+}
+
+.timer-controls input[type=number]{
+
+    flex: 1;
+    background: none;
+    color: var(--text-color);
+    outline: none;
+    font-size: 1.2rem;
 }
