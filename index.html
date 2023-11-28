@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relógio - Pomodoro</title>
 
-    <!-- <script src="/src/js/Main.js" defer></script> -->
-    <script src="/src/js/teste.js" defer></script>
+    <script src="/src/js/timer.js" defer></script>
     <link rel="stylesheet" href="/src/style/style.css">
 
 </head>
@@ -17,7 +16,7 @@
         <section class="timer">
             <h1 id="title">Are you ready?</h1>
             <div class="time-display">
-                <span id="minutes">25</span>
+                <span id="minutes">00</span>
                 <span>:</span>
                 <span id="seconds">00</span>
             </div>
@@ -34,16 +33,14 @@
                 <div class="work-section">
                     <span>WSD:</span>
                     <button class="btn-control" value="addtimework">+</button>
-                    <!-- <input type="number" value="25" id="work_section_time"> -->
-                    <span value="25" id="work_section_time"> 25 min</span>
+                    <span id="work_section_time">0 min</span>
                     <button class="btn-control" value="removetimework">-</button>
                 </div>
 
                 <div class="break-section">
                     <span>BSD:</span>
                     <button class="btn-control" value="addtimebreak">+</button>
-                    <!-- <input type="number" value="5" id="break_section_time"> -->
-                    <span value="5" id="break_section_time"> 5 min</span>
+                    <span id="break_section_time">0 min</span>
                     <button class="btn-control" value="removetimebreak">-</button>
                 </div>
             </section>
