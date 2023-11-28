@@ -96,19 +96,24 @@ main{
 .timer-controls > div{
 
     display: flex;
+    gap: var(--gap-size);
+    margin-bottom: 10px;
 }
 
 .timer-controls .btn-control{
 
     width: 30px;
     height: 30px;
+    font-size: 1.3rem;
 }
 
-.timer-controls input[type=number]{
+.timer-controls .btn-control:hover{
 
+    background-color: #c5c5c5;
+}
+
+#work_section_time,
+#break_section_time{
+    display: flex;
     flex: 1;
-    background: none;
-    color: var(--text-color);
-    outline: none;
-    font-size: 1.2rem;
 }
